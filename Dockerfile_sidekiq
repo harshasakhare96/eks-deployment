@@ -1,0 +1,20 @@
+FROM ruby:2.7
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+
+# for JS
+RUN apt-get remove cmdtest
+RUN apt-get install -y npm
+RUN npm install -g yarn
+
+RUN mkdir /app
+WORKDIR /app
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+COPY package.json /app/package.json
+COPY yarn.lock ./app/yarn.lock
+RUN bundle install
+COPY . /app
+RUN yarn install --check-files
+RUN cd /app && bundle exec rake assets:precompile
+
+ENTRYPOINT ["sh", "scripts/sidekiq-entrypoint.sh"]
