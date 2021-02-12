@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: red-kubernetes-ingress
+
+spec:
+  tls:
+    - hosts: 
+       - sharkcreators.dissolve.com       
+      secretName: red-dissolve-key-pair 
+  rules:
+  - host: sharkcreators.dissolve.com
+    http:
+      paths:
+      - backend:
+          serviceName: red-staging-load-balancer
+          servicePort: 80
