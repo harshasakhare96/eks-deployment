@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   sidekiq:
-    image: dissolvedocker/red:master-sidekiq-prod
+    image: sidekiq-prod
     build:
       context: .
       dockerfile: Dockerfile_sidekiq
@@ -9,7 +9,7 @@ services:
       - .env.production
 
   web:
-    image: dissolvedocker/red:master-prod
+    image: prod
     build:
       context: .
       dockerfile: Dockerfile_web
