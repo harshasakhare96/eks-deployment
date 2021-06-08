@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: red-staging-load-balancer
+  name: load-balancer
 spec:
   type: LoadBalancer
   selector:
-    app: red-staging-app
+    app: app
   ports:
    - name:  http
      protocol: TCP
@@ -17,4 +17,4 @@ spec:
      targetPort: 3000
          #  externalTrafficPolicy: Cluster 
   externalIPs: 
-   - 162.243.3.238  
+   - 
