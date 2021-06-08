@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: red-staging-deployment
+  name: deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: red-staging-app
+      app: app
   template:
     metadata:
       labels:
-        app: red-staging-app
+        app: app
     spec:
       containers:
-      - name: red-app-container
-        image: dissolvedocker/red:staging1.4
+      - name: container
+        image: staging1.4
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
         envFrom:
         - configMapRef:
-            name: red-staging-config
+            name: config
       imagePullSecrets:
       - name: regcred
       restartPolicy: Always
